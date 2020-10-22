@@ -4,14 +4,16 @@ using KARYA.DATAACCESS.Concrete.EntityFramework.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace KARYA.DATAACCESS.Migrations.HanelApp
 {
     [DbContext(typeof(HanelContext))]
-    partial class HanelContextModelSnapshot : ModelSnapshot
+    [Migration("20201022152105_HanelAppBudgetDetailSubMigration2")]
+    partial class HanelAppBudgetDetailSubMigration2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -217,6 +219,9 @@ namespace KARYA.DATAACCESS.Migrations.HanelApp
 
                     b.Property<decimal>("Ekim")
                         .HasColumnType("decimal(18,2)");
+
+                    b.Property<bool>("Enable")
+                        .HasColumnType("bit");
 
                     b.Property<decimal>("Eylul")
                         .HasColumnType("decimal(18,2)");

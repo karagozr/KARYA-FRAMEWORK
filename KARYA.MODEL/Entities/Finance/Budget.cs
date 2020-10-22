@@ -26,6 +26,8 @@ namespace KARYA.MODEL.Entities.Finance
         public string BudgetSubCode { get; set; }
 
         [Required]
+        public short BudgetYear { get; set; }
+        [Required]
         public double BudgetTaxMultiplier { get; set; } = 1;
         public string Description1 { get; set; }
         public string Description2 { get; set; }
@@ -35,6 +37,6 @@ namespace KARYA.MODEL.Entities.Finance
         public int? CreatedUserId { get; set; }
         public int? UpdatedUserId { get; set; }
 
-        public IEnumerable<BudgetDetail> BudgetDetails { get; set; }
+        public IEnumerable<Budget> BudgetDetails { get; set; }
     }
 }

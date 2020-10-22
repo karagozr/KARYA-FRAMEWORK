@@ -107,7 +107,7 @@ namespace KARYA.BUSINESS.Concrete
         }
 
         
-        public async Task<IDataResult<IEnumerable<PlReportDetailForBudgetOrCost>>> GetPeportValuesDetails(PlReportFilterModel plReportFilterModel)
+        public async Task<IDataResult<IEnumerable<PlReportDetailForBudgetOrCost>>> GetReportValuesDetails(PlReportFilterModel plReportFilterModel)
         {
             try
             {
@@ -128,7 +128,7 @@ namespace KARYA.BUSINESS.Concrete
 
                     var data = await connection.QueryAsync<PlReportDetailForBudgetOrCost>("Pr_PlPeportValuesDetails", 
                         new { plReportFilterModel.Moment,plReportFilterModel.SubCode ,plReportFilterModel.BudgetOrCostType, 
-                              plReportFilterModel.Month, plReportFilterModel.Currency,projectCodes }, 
+                              plReportFilterModel.Month, plReportFilterModel.Currency,projectCodes,plReportFilterModel.BranchCode }, 
                         commandType: CommandType.StoredProcedure);
                     int i = 1;
 

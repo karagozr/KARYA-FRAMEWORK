@@ -15,6 +15,12 @@ namespace KARYA.MODEL.Entities.Finance
         [Required]
         public DateTime PeriodDate { get; set; }
 
+        [Required]
+        public short BudgetYear { get; set; }
+
+        [Required]
+        public short BudgetMonth { get; set; }
+
         [StringLength(10), Required]
         public string CurrencyCode { get; set; }
 

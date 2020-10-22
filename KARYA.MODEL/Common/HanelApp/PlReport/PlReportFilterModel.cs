@@ -15,6 +15,8 @@ namespace KARYA.MODEL.Common.HanelApp.PlReport
 
         public List<string> ProjectCode { get; set; }
 
+        public string BranchCode { get; set; }
+
         public int Month { get; set; }
 
         public string SubCode { get; set; }

@@ -17,6 +17,6 @@ namespace KARYA.BUSINESS.Abstract.Hanel.PlReport
 
         Task<IDataResult<IEnumerable<KARYA.MODEL.Dtos.ProjectsForPlReportFilter>>> GetProjectsForReportFilter();
 
-        Task<IDataResult<IEnumerable<KARYA.MODEL.Dtos.PlReportDetailForBudgetOrCost>>> GetPeportValuesDetails(PlReportFilterModel plReportFilterModel);
+        Task<IDataResult<IEnumerable<KARYA.MODEL.Dtos.PlReportDetailForBudgetOrCost>>> GetReportValuesDetails(PlReportFilterModel plReportFilterModel);
     }
 }

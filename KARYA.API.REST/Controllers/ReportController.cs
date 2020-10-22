@@ -6,11 +6,14 @@ using System.Threading.Tasks;
 using KARYA.API.REST.Models.Finance;
 using KARYA.BUSINESS.Abstract.Hanel.Finance;
 using KARYA.BUSINESS.Abstract.Hanel.PlReport;
+using KARYA.MODEL.Common.HanelApp.Finance;
 using KARYA.MODEL.Common.HanelApp.PlReport;
 using KARYA.MODEL.Dtos;
 using KARYA.MODEL.Entities.Finance;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 
 namespace KARYA.API.REST.Controllers
 {
@@ -20,11 +23,13 @@ namespace KARYA.API.REST.Controllers
     public class ReportController : Controller
     {
         IPlReportManager _plReportManager;
-        IPivotReportTemplateManager _reportTemplateManager; 
-        public ReportController(IPlReportManager plReportManager, IPivotReportTemplateManager reportTemplateManager)
+        IPivotReportTemplateManager _reportTemplateManager;
+        ICariReportManager _cariReportManager;
+        public ReportController(IPlReportManager plReportManager, IPivotReportTemplateManager reportTemplateManager, ICariReportManager cariReportManager)
         {
             _plReportManager = plReportManager;
             _reportTemplateManager = reportTemplateManager;
+            _cariReportManager = cariReportManager;
         }
 
         [HttpPost("getpl")]
@@ -32,25 +37,9 @@ namespace KARYA.API.REST.Controllers
         {
             var resultData = await _plReportManager.GetReport(plReportFilterModel);
 
-            //return new PlReport
-            //{
-            //    Budget = 50000,
-            //    ActualCost = 60000,
-            //    Differance = 10000,
-            //    Rate = 0.2,
-            //    LastActualCost = 55000,
-            //    LastDifferance = 5000,
-            //    LastRate = 0.1
-            //};
-
             if (resultData.Success)
             {
-                return Ok(new
-                {
-                    success = resultData.Success,
-                    message = resultData.Message,
-                    resultData = resultData.Data
-                });
+                return Ok(resultData.Data);
             }
             else
             {
@@ -62,7 +51,6 @@ namespace KARYA.API.REST.Controllers
         public async Task<IActionResult> GetPlReportWithDetailValues(PlReportFilterModel plReportFilterModel)
         {
             var resultData = await _plReportManager.GetReportWithDetails(plReportFilterModel);
-
             foreach (var item in resultData.Data)
             {
                 item.SubCode2 = item.SubCode;
@@ -71,12 +59,6 @@ namespace KARYA.API.REST.Controllers
             if (resultData.Success)
             {
                 return Ok(resultData.Data.ToList());
-                //return Ok(new
-                //{
-                //    success = resultData.Success,
-                //    message = resultData.Message,
-                //    resultData = resultData.Data
-                //});
             }
             else
             {
@@ -87,17 +69,11 @@ namespace KARYA.API.REST.Controllers
         [HttpPost("getpldetail")]
         public async Task<IActionResult> GetPlReportDetailValues(PlReportFilterModel plReportFilterModel)
         {
-            var resultData = await _plReportManager.GetPeportValuesDetails(plReportFilterModel);
+            var resultData = await _plReportManager.GetReportValuesDetails(plReportFilterModel);
 
             if (resultData.Success)
             {
                 return Ok(resultData.Data.ToList());
-                //return Ok(new
-                //{
-                //    success = resultData.Success,
-                //    message = resultData.Message,
-                //    resultData = resultData.Data
-                //});
             }
             else
             {
@@ -113,12 +89,6 @@ namespace KARYA.API.REST.Controllers
             if (filterData.Success)
             {
                 return Ok(filterData.Data.ToList());
-                //return Ok(new
-                //{
-                //    success = filterData.Success,
-                //    message = filterData.Message,
-                //    resultData = filterData.Data.ToList()
-                //});
             }
             else
             {
@@ -134,7 +104,10 @@ namespace KARYA.API.REST.Controllers
 
             if (resultData.Success)
             {
-                return Ok(resultData);
+                var serializerSettings = new JsonSerializerSettings();
+                serializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+
+                return Ok(JsonConvert.SerializeObject(resultData.Data, serializerSettings));
             }
             else
             {
@@ -191,17 +164,62 @@ namespace KARYA.API.REST.Controllers
                 return BadRequest();
         }
 
-        [HttpPost("testpostap")]
-        public async Task<IActionResult> TestPost(TestModel testModel)
+        [HttpGet("CariReport")]
+        public async Task<IActionResult> CariReportTitles()
         {
-            if (testModel.Id == 1)
+            var result = await _cariReportManager.GetCariReportTitles();
+
+            if (result.Success)
             {
-                return Ok(new
-                {
-                    success = true,
-                    message = "Başarılı",
-                    resultData = "Data"
-                });
+                return Ok(result.Data.ToList());
+            }
+            else
+            {
+                return NoContent();
+            }
+
+        }
+
+        [HttpGet("CariReport/SubGroup")]
+        public async Task<IActionResult> CariReportSubGroup(string kod)
+        {
+            var result = await _cariReportManager.GetCariReportSubGroup(new CariReportFilterModel {CariKod=kod });
+
+            if (result.Success)
+            {
+                return Ok(result.Data.ToList());
+            }
+            else
+            {
+                return NoContent();
+            }
+
+        }
+
+        [HttpGet("CariReport/SubGroup/GrupDetail")]
+        public async Task<IActionResult> CariReportSubGroupDetail(string cariKod,string projeKod, string raporHesapKod)
+        {
+            var result = await _cariReportManager.GetCariReportSubGroupDetail(new CariReportFilterModel { CariKod=cariKod, ProjeKod=projeKod,RaporHesapKod = raporHesapKod } );
+
+            if (result.Success)
+            {
+                return Ok(result.Data.ToList());
+            }
+            else
+            {
+                return NoContent();
+            }
+
+        }
+
+        [HttpGet("CariReport/SubGroup/GrupDetail/FisDetail")]
+        public async Task<IActionResult> CariReportSubGroupDetailFromFisNo(string fisNo, string subeKod)
+        {
+            var result = await _cariReportManager.GetCariReportSubGroupDetailFromFisNo(new CariReportFilterModel { FisNo=fisNo, SubeKod=subeKod });
+
+            if (result.Success)
+            {
+                return Ok(result.Data.ToList());
             }
             else
             {

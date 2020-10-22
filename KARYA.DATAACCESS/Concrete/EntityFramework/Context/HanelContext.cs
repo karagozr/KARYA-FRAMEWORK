@@ -25,6 +25,8 @@ namespace KARYA.DATAACCESS.Concrete.EntityFramework.Context
 
         public DbSet<BudgetDetail> BudgetDetail { get; set; }
 
+        public DbSet<BudgetSubDetail> BudgetSubDetail { get; set; }
+
         public DbSet<BudgetExchangeRate> BudgetExchangeRate { get; set; }
 
         public DbSet<PivotReportTemplate> PivotReportTemplate { get; set; }

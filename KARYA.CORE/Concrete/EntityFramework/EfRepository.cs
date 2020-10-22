@@ -43,8 +43,12 @@ namespace KARYA.CORE.Concrete.EntityFramework
         {
             using (var context = new TContext())
             {
-                var addedEntity = context.Entry(entities);
-                addedEntity.State = EntityState.Added;
+                foreach (var item in entities)
+                {
+                    var addedEntity = context.Entry(item);
+                    addedEntity.State = EntityState.Added;
+                }
+                
                 await context.SaveChangesAsync();
                 
             }
@@ -65,11 +69,14 @@ namespace KARYA.CORE.Concrete.EntityFramework
 
         public async Task Update(IEnumerable<TEntity> entities)
         {
-            using (var context = new TContext())
+            using ( var context = new TContext())
             {
-                var updatedEntity = context.Entry(entities);
+                foreach (var item in entities)
+                {
+                    var updatedEntity = context.Entry(item);
+                    updatedEntity.State = EntityState.Modified;
+                }
 
-                updatedEntity.State = EntityState.Modified;
                 await context.SaveChangesAsync();
 
 

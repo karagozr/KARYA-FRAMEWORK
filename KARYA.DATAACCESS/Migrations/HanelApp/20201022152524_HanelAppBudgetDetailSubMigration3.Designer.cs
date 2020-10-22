@@ -4,14 +4,16 @@ using KARYA.DATAACCESS.Concrete.EntityFramework.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace KARYA.DATAACCESS.Migrations.HanelApp
 {
     [DbContext(typeof(HanelContext))]
-    partial class HanelContextModelSnapshot : ModelSnapshot
+    [Migration("20201022152524_HanelAppBudgetDetailSubMigration3")]
+    partial class HanelAppBudgetDetailSubMigration3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

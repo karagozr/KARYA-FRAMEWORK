@@ -4,14 +4,16 @@ using KARYA.DATAACCESS.Concrete.EntityFramework.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace KARYA.DATAACCESS.Migrations.HanelApp
 {
     [DbContext(typeof(HanelContext))]
-    partial class HanelContextModelSnapshot : ModelSnapshot
+    [Migration("20201016132306_HanelBudgetUpdateMigration")]
+    partial class HanelBudgetUpdateMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -30,9 +32,6 @@ namespace KARYA.DATAACCESS.Migrations.HanelApp
                         .IsRequired()
                         .HasColumnType("nvarchar(20)")
                         .HasMaxLength(20);
-
-                    b.Property<int?>("BudgetId")
-                        .HasColumnType("int");
 
                     b.Property<string>("BudgetMainCode")
                         .IsRequired()
@@ -83,8 +82,6 @@ namespace KARYA.DATAACCESS.Migrations.HanelApp
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("BudgetId");
 
                     b.ToTable("Budget");
                 });
@@ -188,76 +185,6 @@ namespace KARYA.DATAACCESS.Migrations.HanelApp
                     b.ToTable("BudgetExchangeRate");
                 });
 
-            modelBuilder.Entity("KARYA.MODEL.Entities.Finance.BudgetSubDetail", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<decimal>("Agustos")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<decimal>("Aralik")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<int>("BudgetId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime?>("CreatedTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int?>("CreatedUserId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(200)")
-                        .HasMaxLength(200);
-
-                    b.Property<decimal>("Ekim")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<decimal>("Eylul")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<decimal>("Haziran")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<decimal>("Kasim")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<decimal>("Mart")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<decimal>("Mayis")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<decimal>("Nisan")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<decimal>("Ocak")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<decimal>("Subat")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<decimal>("Temmuz")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<DateTime?>("UpdatedTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int?>("UpdatedUserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("BudgetId");
-
-                    b.ToTable("BudgetSubDetail");
-                });
-
             modelBuilder.Entity("KARYA.MODEL.Entities.Finance.PivotReportTemplate", b =>
                 {
                     b.Property<int>("Id")
@@ -294,26 +221,10 @@ namespace KARYA.DATAACCESS.Migrations.HanelApp
                     b.ToTable("PivotReportTemplate");
                 });
 
-            modelBuilder.Entity("KARYA.MODEL.Entities.Finance.Budget", b =>
-                {
-                    b.HasOne("KARYA.MODEL.Entities.Finance.Budget", null)
-                        .WithMany("BudgetDetails")
-                        .HasForeignKey("BudgetId");
-                });
-
             modelBuilder.Entity("KARYA.MODEL.Entities.Finance.BudgetDetail", b =>
                 {
                     b.HasOne("KARYA.MODEL.Entities.Finance.Budget", "Budget")
-                        .WithMany()
-                        .HasForeignKey("BudgetId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("KARYA.MODEL.Entities.Finance.BudgetSubDetail", b =>
-                {
-                    b.HasOne("KARYA.MODEL.Entities.Finance.Budget", "Budget")
-                        .WithMany()
+                        .WithMany("BudgetDetails")
                         .HasForeignKey("BudgetId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

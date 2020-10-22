@@ -35,6 +35,10 @@ namespace KARYA.MODEL.Dtos
         public double TlBorc { get; set; }
         public double UsdBorc { get; set; }
         public double EuroBorc { get; set; }
+        public double DovizAlacak { get; set; }
+        public double TlAlacak { get; set; }
+        public double UsdAlacak { get; set; }
+        public double EuroAlacak { get; set; }
         public string KayitYapanKullanici { get; set; }
         public DateTime KayitTarihi { get; set; }
     }
