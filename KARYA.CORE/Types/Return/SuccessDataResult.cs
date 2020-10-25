@@ -20,9 +20,5 @@ namespace KARYA.CORE.Types.Return
 
         }
 
-        public SuccessDataResult() : base(default, success: true)
-        {
-
-        }
     }
 }

@@ -10,5 +10,6 @@ namespace KARYA.DATAACCESS.Abstract.Hanel.Finance
 {
     public interface IBudgetSubDetailDal : IBaseDal<BudgetSubDetail>
     {
+        Task<IEnumerable<BudgetSubDetailDto>> ListWithSubCode(Expression<Func<BudgetSubDetail, bool>> filter);
     }
 }
