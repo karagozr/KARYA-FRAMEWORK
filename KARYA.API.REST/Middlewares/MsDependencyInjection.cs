@@ -28,8 +28,10 @@ namespace KARYA.API.REST.Middlewares
             services.AddScoped<IBudgetManager, BudgetManager>();
             services.AddScoped<IBudgetDetailDal, BudgetDetailDal>();
             services.AddScoped<IBudgetDetailManager, BudgetDetailManager>();
-
+            services.AddScoped<IBudgetSubDetailDal, BudgetSubDetailDal>();
+            services.AddScoped<IBudgetSubDetailManager, BudgetSubDetailManager>();
             services.AddScoped<IBudgetCodeNameManager, BudgetCodeNameManager>();
+            services.AddScoped<IBudgetActualCostManager, BudgetActualCostManager>();
 
             services.AddScoped<IPivotReportTemplateDal, PivotReportTemplateDal>();
             services.AddScoped<IPivotReportTemplateManager, PivotReportTemplateManager>();

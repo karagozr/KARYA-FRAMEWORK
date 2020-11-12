@@ -9,6 +9,7 @@ using KARYA.MODEL.Dtos.Hanel.Finance.Budget;
 using KARYA.MODEL.Entities.Finance;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -23,6 +24,20 @@ namespace KARYA.BUSINESS.Concrete.Hanel.Finance
             _budgetSubDetailDal = budgetSubDetailDal;
         }
 
+        public async Task<IDataResult<IEnumerable<BudgetSubDetailDto>>> Select(IEnumerable<int> budgetIds)
+        {
+            try
+            {
+                var result = await _budgetSubDetailDal.ListWithSubCode(x => budgetIds.Contains(x.BudgetId));
+
+                return new SuccessDataResult<IEnumerable<BudgetSubDetailDto>>(result);
+            }
+            catch (Exception ex)
+            {
+                return new ErrorDataResult<IEnumerable<BudgetSubDetailDto>>(null,ex.Message);
+            }
+            
+        }
     }
 
 }

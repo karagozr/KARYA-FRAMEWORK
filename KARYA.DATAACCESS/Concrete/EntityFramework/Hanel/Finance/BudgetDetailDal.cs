@@ -29,6 +29,9 @@ namespace KARYA.DATAACCESS.Concrete.EntityFramework.Hanel.Finance
                     BudgetMainCodeDesc = "",
                     BudgetSubCode = x.Budget.BudgetSubCode,
                     BudgetSubCodeDesc = "",
+                    BudgetType=x.Budget.BudgetType,
+                    BranchCode=x.Budget.BranchCode,
+                    SiteCode = x.Budget.SiteCode,
                     Description1 = x.Budget.Description1,
                     Description2 = x.Budget.Description2,
                     Description3 = x.Budget.Description3,
@@ -62,10 +65,13 @@ namespace KARYA.DATAACCESS.Concrete.EntityFramework.Hanel.Finance
                 {
                     x.Id,
                     x.BudgetYear,
+                    x.BudgetType,
                     x.BudgetMainCode,
                     x.BudgetMainCodeDesc,
                     x.BudgetSubCode,
                     x.BudgetSubCodeDesc,
+                    x.BranchCode,
+                    x.SiteCode,
                     x.Description1,
                     x.Description2,
                     x.Description3,
@@ -73,10 +79,13 @@ namespace KARYA.DATAACCESS.Concrete.EntityFramework.Hanel.Finance
                 {
                     Id = s.Key.Id,
                     BudgetYear      = s.Key.BudgetYear,
+                    BudgetType = s.Key.BudgetType,
                     BudgetMainCode  = s.Key.BudgetMainCode,
                     BudgetMainCodeDesc  = s.Key.BudgetMainCodeDesc,
                     BudgetSubCode       = s.Key.BudgetSubCode,
                     BudgetSubCodeDesc   = s.Key.BudgetSubCodeDesc,
+                    BranchCode = s.Key.BranchCode,
+                    SiteCode = s.Key.SiteCode,
                     Description1 = s.Key.Description1,
                     Description2 = s.Key.Description2,
                     Description3 = s.Key.Description3,
@@ -112,10 +121,13 @@ namespace KARYA.DATAACCESS.Concrete.EntityFramework.Hanel.Finance
                 {
                     Id = x.Budget.Id,
                     BudgetYear = x.Budget.BudgetYear,
+                    BudgetType = x.Budget.BudgetType,
                     BudgetMainCode = x.Budget.BudgetMainCode,
                     BudgetMainCodeDesc = "",
                     BudgetSubCode = x.Budget.BudgetSubCode,
                     BudgetSubCodeDesc = "",
+                    BranchCode = x.Budget.BranchCode,
+                    SiteCode = x.Budget.SiteCode,
                     Description1 = x.Budget.Description1,
                     Description2 = x.Budget.Description2,
                     Description3 = x.Budget.Description3,
@@ -149,10 +161,13 @@ namespace KARYA.DATAACCESS.Concrete.EntityFramework.Hanel.Finance
                 {
                     x.Id,
                     x.BudgetYear,
+                    x.BudgetType,
                     x.BudgetMainCode,
                     x.BudgetMainCodeDesc,
                     x.BudgetSubCode,
                     x.BudgetSubCodeDesc,
+                    x.BranchCode,
+                    x.SiteCode,
                     x.Description1,
                     x.Description2,
                     x.Description3,
@@ -160,10 +175,13 @@ namespace KARYA.DATAACCESS.Concrete.EntityFramework.Hanel.Finance
                 {
                     Id = s.Key.Id,
                     BudgetYear = s.Key.BudgetYear,
+                    BudgetType = s.Key.BudgetType,
                     BudgetMainCode = s.Key.BudgetMainCode,
                     BudgetMainCodeDesc = s.Key.BudgetMainCodeDesc,
                     BudgetSubCode = s.Key.BudgetSubCode,
                     BudgetSubCodeDesc = s.Key.BudgetSubCodeDesc,
+                    BranchCode = s.Key.BranchCode,
+                    SiteCode = s.Key.SiteCode,
                     Description1 = s.Key.Description1,
                     Description2 = s.Key.Description2,
                     Description3 = s.Key.Description3,
@@ -195,7 +213,6 @@ namespace KARYA.DATAACCESS.Concrete.EntityFramework.Hanel.Finance
                     AralikId = s.Max(m => m.AralikId)
 
                 }).ToListAsync());
-
                 return res;
             }
         }

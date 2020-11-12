@@ -11,6 +11,6 @@ namespace KARYA.BUSINESS.Abstract.Hanel.Finance
 {
     public interface IBudgetDetailManager : IBaseManager<BudgetDetail>
     {
-        Task<IDataResult<IEnumerable<BudgetWithMonthsDto>>> ListOfBudgetWithMonths(string projectCode, short budgetYear);
+        Task<IDataResult<IEnumerable<BudgetAndActualWithMonthsDto>>> ListOfBudgetAndActualWithMonths(string projectCode, short budgetYear, short actualYear, string currencyCode);
     }
 }

@@ -31,9 +31,6 @@ namespace KARYA.DATAACCESS.Migrations.HanelApp
                         .HasColumnType("nvarchar(20)")
                         .HasMaxLength(20);
 
-                    b.Property<int?>("BudgetId")
-                        .HasColumnType("int");
-
                     b.Property<string>("BudgetMainCode")
                         .IsRequired()
                         .HasColumnType("nvarchar(20)")
@@ -68,11 +65,18 @@ namespace KARYA.DATAACCESS.Migrations.HanelApp
                     b.Property<string>("Description3")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("DescriptionDetail")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<bool>("Enable")
                         .HasColumnType("bit");
 
                     b.Property<string>("ProjectCode")
                         .IsRequired()
+                        .HasColumnType("nvarchar(20)")
+                        .HasMaxLength(20);
+
+                    b.Property<string>("SiteCode")
                         .HasColumnType("nvarchar(20)")
                         .HasMaxLength(20);
 
@@ -83,8 +87,6 @@ namespace KARYA.DATAACCESS.Migrations.HanelApp
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("BudgetId");
 
                     b.ToTable("Budget");
                 });
@@ -292,13 +294,6 @@ namespace KARYA.DATAACCESS.Migrations.HanelApp
                     b.HasKey("Id");
 
                     b.ToTable("PivotReportTemplate");
-                });
-
-            modelBuilder.Entity("KARYA.MODEL.Entities.Finance.Budget", b =>
-                {
-                    b.HasOne("KARYA.MODEL.Entities.Finance.Budget", null)
-                        .WithMany("BudgetDetails")
-                        .HasForeignKey("BudgetId");
                 });
 
             modelBuilder.Entity("KARYA.MODEL.Entities.Finance.BudgetDetail", b =>

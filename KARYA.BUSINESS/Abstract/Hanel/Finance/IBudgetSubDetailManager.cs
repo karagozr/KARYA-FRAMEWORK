@@ -11,5 +11,6 @@ namespace KARYA.BUSINESS.Abstract.Hanel.Finance
 {
     public interface IBudgetSubDetailManager : IBaseManager<BudgetSubDetail>
     {
+        Task<IDataResult<IEnumerable<BudgetSubDetailDto>>> Select(IEnumerable<int> budgetIds);
     }
 }

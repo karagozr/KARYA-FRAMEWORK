@@ -24,6 +24,7 @@ namespace KARYA.DATAACCESS.Concrete.EntityFramework.Hanel.Finance
                 {
                     Id = x.Id,
                     BudgetSubCode = x.Budget.BudgetSubCode,
+                    Description = x.Description,
                     BudgetId = x.BudgetId,
                     Ocak = x.Ocak,
                     Subat = x.Subat,
@@ -42,6 +43,7 @@ namespace KARYA.DATAACCESS.Concrete.EntityFramework.Hanel.Finance
                 {
                     Id = x.Id,
                     BudgetSubCode = x.Budget.BudgetSubCode,
+                    Description = x.Description,
                     BudgetId = x.BudgetId,
                     Ocak = x.Ocak,
                     Subat = x.Subat,

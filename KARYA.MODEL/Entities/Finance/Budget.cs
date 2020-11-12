@@ -4,6 +4,7 @@ using KARYA.MODEL.Enums.HanelApp;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace KARYA.MODEL.Entities.Finance
@@ -19,6 +20,9 @@ namespace KARYA.MODEL.Entities.Finance
         [StringLength(20), Required]
         public string ProjectCode { get; set; }
 
+        [Column(Order = 5), StringLength(20)]
+        public string SiteCode { get; set; }
+
         [StringLength(20), Required]
         public string BudgetMainCode { get; set; }
 
@@ -32,11 +36,12 @@ namespace KARYA.MODEL.Entities.Finance
         public string Description1 { get; set; }
         public string Description2 { get; set; }
         public string Description3 { get; set; }
+        public string DescriptionDetail { get; set; }
         public DateTime? CreatedTime { get; set; }
         public DateTime? UpdatedTime { get; set; }
         public int? CreatedUserId { get; set; }
         public int? UpdatedUserId { get; set; }
 
-        public IEnumerable<Budget> BudgetDetails { get; set; }
+        //public IEnumerable<Budget> BudgetDetails { get; set; }
     }
 }

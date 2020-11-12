@@ -6,6 +6,14 @@ namespace KARYA.MODEL.Dtos.Hanel.Finance.Budget
 {
     public class BudgetWithMonthsDto : Entities.Finance.Budget
     {
+        public string ForeingId 
+        { 
+            get 
+            {
+                return BudgetSubCode + "-" + (BudgetType!=Enums.HanelApp.BudgetType.IncomeBudget?"0": (BranchCode==null?"0":BranchCode) + "-" + SiteCode);
+            }
+            set { } 
+        } 
         public string BudgetMainCodeDesc { get; set; }
 
         public string BudgetSubCodeDesc { get; set; }
